@@ -3,12 +3,16 @@ from scipy import sparse
 from scipy.sparse import linalg as splin
 from scipy.interpolate import CubicSpline
 
+from .derivative import register
 
+
+@register("cubic_spline")
 def cubic_spline_deriv(x, y, order=1):
     cs = CubicSpline(x, y)
     return cs.derivative(order)(x)
 
 
+@register("fft")
 def fft_deriv(x, y):
     n = len(x)
     dx = x[1] - x[0]
@@ -17,6 +21,7 @@ def fft_deriv(x, y):
     return np.fft.ifft(1j * w * np.fft.fft(y))
 
 
+@register("tvreg")
 def tvregdiff(x, y, **kwargs):
     return _tvregdiff(y.reshape(-1), dx=x[1] - x[0], **kwargs)[:-1]
 

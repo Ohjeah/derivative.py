@@ -2,7 +2,10 @@ import numpy as np
 
 from scipy.special import comb
 
+from .derivative import register
 
+
+@register()
 def finitediff(x, y, **kwargs):
     dx = x[1] - x[0]
     dy = np.zeros_like(x)
@@ -14,6 +17,7 @@ def finitediff(x, y, **kwargs):
     return dy
 
 
+@register()
 def holoborodko(x, y, M=2):
     """
 

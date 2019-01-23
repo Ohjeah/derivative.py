@@ -12,6 +12,7 @@ noise_amplitude = 0.02
 
 x = np.linspace(0, 6 * np.pi, n_points)
 y = f(x) + noise_amplitude * np.random.normal(size=x.shape)
+y = y.reshape(-1, 1)
 
 plt.plot(x, np.cos(x), "x--", label="f'")
 for method in methods:
